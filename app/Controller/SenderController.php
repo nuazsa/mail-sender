@@ -33,7 +33,7 @@ class SenderController
             $mail->Host       = 'smtp.gmail.com';          
             $mail->SMTPAuth   = true;                               
             $mail->Username   = 'nurazissaputra@gmail.com';            
-            $mail->Password   = '';                    
+            $mail->Password   = $_SERVER['SECRET_KEY'];                    
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            
             $mail->Port       = 465;                                
 
