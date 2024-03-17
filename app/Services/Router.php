@@ -59,6 +59,7 @@ class Router
         }
 
         http_response_code(404);
+        View::render('components/header');
         echo "Controller not found";
     }
 }
