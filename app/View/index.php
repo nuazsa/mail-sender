@@ -65,7 +65,7 @@
             <div class="version">
                 <h2>Version 2</h2>
                 <p>Implement login authentication using email tokens.</p>
-                <a href="/version2/signin" class="btn">Go to Version 2</a>
+                <a href="/version2/home" class="btn">Go to Version 2</a>
             </div>
         </div>
     </div>

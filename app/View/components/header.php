@@ -18,7 +18,7 @@
             <div class="col">
                 <select id="versionSelect" name="version">
                     <option value="version1">Version 1</option>
-                    <option value="version2/signin">Version 2</option>
+                    <option value="version2/home">Version 2</option>
                     <option value="version3">Version 3</option>
                 </select>
             </div>
