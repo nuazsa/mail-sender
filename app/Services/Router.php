@@ -5,12 +5,19 @@ namespace Nuazsa\MailSender\Services;
 class Router
 {
     private static array $routes = [];
-
-    public static function add(string $method, string  $path, string  $controller, string  $function, array $middlewares = []): void
+    private static array $prefixes = [];
+    
+    private static function getPath(string $path): string
+    {
+        $prefix = implode('', self::$prefixes);
+        return $prefix . $path;
+    }
+    
+    public static function add(string $method, string $path, string $controller, string $function, array $middlewares = []): void
     {
         self::$routes[] = [
             'method' => $method,
-            'path' => $path,
+            'path' => self::getPath($path),
             'controller' => $controller,
             'function' => $function,
             'middlewares' => $middlewares
@@ -25,6 +32,13 @@ class Router
     public static function post(string  $path, string  $controller, string  $function, array $middlewares = []): void
     {
         self::add('POST', $path, $controller, $function, $middlewares);
+    }
+
+    public static function prefix(string $prefix, callable $callback): void
+    {
+        self::$prefixes[] = $prefix;
+        $callback();
+        array_pop(self::$prefixes);
     }
 
     public static function run(): void

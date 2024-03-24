@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin: 0;
+}
+nav {
+    background-color: #007bff;
+    color: #fff;
+    margin-bottom: 50px;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+.col {
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+}
+
+select {
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: none;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}

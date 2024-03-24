@@ -2,9 +2,10 @@
 
 namespace Nuazsa\MailSender\Controller;
 
-use Nuazsa\MailSender\Services\Env;
+use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\PHPMailer;
+use Nuazsa\MailSender\Services\Env;
 use Nuazsa\MailSender\Services\View;
 
 
@@ -23,9 +24,11 @@ class SenderController
     {
         $name = htmlspecialchars($_POST['name']);
         $email = htmlspecialchars($_POST['email']);
-        $subject = htmlspecialchars($_POST['subject']); 
+        $subject = htmlspecialchars($_POST['subject']);
         $message = htmlspecialchars($_POST['messege']);
 
+        $dotenv = Dotenv::createImmutable(__DIR__ . '/../../');
+        $dotenv->load();
         $mail = new PHPMailer(true);
 
         try {
@@ -34,12 +37,12 @@ class SenderController
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'nurazissaputra@gmail.com';
-            $mail->Password   = Env::get('SECRET_KEY');
+            $mail->Password   = $_ENV['SECRET_KEY'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('nurazissaputra@gmail.com', 'Mailer');
+            $mail->setFrom('nurazissaputra@gmail.com', 'Mail-Sender');
             $mail->addAddress($email, $name);
 
             //Content
@@ -48,7 +51,13 @@ class SenderController
             $mail->Body    = $message;
 
             $mail->send();
-            echo 'Message has been sent';
+
+            $model = [
+                'title' => 'Mail Sender',
+                'message' => 'Message has been sent'
+            ];
+
+            View::render('version1', $model);
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
